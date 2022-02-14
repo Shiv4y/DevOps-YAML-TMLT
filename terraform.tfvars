@@ -1,0 +1,8 @@
+subscription_id = ""
+client_id       = ""
+client_secret   = ""
+tenant_id       = ""
+resourcegrpname   = "k8srm"
+resourceglocation = "centralindia"
+k8sname           = "testk8s"
+dns_prefix        = "dnsk8s"

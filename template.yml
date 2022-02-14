@@ -1,0 +1,28 @@
+      steps:
+        - task: TerraformInstaller@0
+          inputs:
+            terraformVersion: '1.1.5'
+        - task: TerraformTaskV2@2
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            #commandOptions: '-reconfigure'
+            backendServiceArm: 'testk8s'
+            backendAzureRmResourceGroupName: 'TestRG'
+            backendAzureRmStorageAccountName: 'testk8sshiv4y'
+            backendAzureRmContainerName: 'terraform-k8s'
+            backendAzureRmKey: '$(backend)'
+
+        - task: TerraformTaskV2@2
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            commandOptions: '$(tfvars)'
+            environmentServiceNameAzureRM: 'testk8s'
+        - task: TerraformTaskV2@2
+          displayName: terraform apply
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            commandOptions: '$(tfvars)'
+            environmentServiceNameAzureRM: 'testk8s'
